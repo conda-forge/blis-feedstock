@@ -10,7 +10,7 @@ case $target_platform in
         config=intel64
         ;;
     osx-arm64)
-        config=cortexa53/armv8a
+        config=cortexa53
         ;;
     linux-64)
         config=x86_64
