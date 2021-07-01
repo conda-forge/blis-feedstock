@@ -29,9 +29,13 @@ requirements:
 test:
   requires:
     - clang
+    - numpy
+    - python
   files:
     - debug_blis.c
   commands:
+    # show CPU features of agent we're running on
+    - python -c "import numpy; numpy._pytesttester._show_numpy_info()"
     - clang-cl debug_blis.c
     - debug_blis
     - test -f $PREFIX/lib/libblis.a                       # [unix]
