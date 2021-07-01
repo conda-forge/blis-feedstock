@@ -27,7 +27,13 @@ requirements:
   run:
 
 test:
+  requires:
+    - clang
+  files:
+    - debug_blis.c
   commands:
+    - clang-cl debug_blis.c
+    - debug_blis
     - test -f $PREFIX/lib/libblis.a                       # [unix]
     - test -f $PREFIX/lib/libblis${SHLIB_EXT}             # [unix]
     - test -f $PREFIX/include/blis/blis.h                 # [unix]
