@@ -1,4 +1,4 @@
-#include <blis.h>
+#include <blis/blis.h>
 
 #include <assert.h>
 #include <math.h>
