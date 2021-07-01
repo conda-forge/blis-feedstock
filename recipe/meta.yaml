@@ -28,7 +28,7 @@ requirements:
 
 test:
   requires:
-    - {{ compiler('clang') }}
+    - {{ compiler('c') }}
     - numpy
     - python
   files:
@@ -36,7 +36,9 @@ test:
   commands:
     # show CPU features of agent we're running on
     - python -c "import numpy; numpy._pytesttester._show_numpy_info()"
-    - clang-cl debug_blis.c
+    - gcc debug_blis.c                                    # [linux]
+    - clang-cl debug_blis.c                               # [osx]
+    - cl debug_blis.c                                     # [win]
     - debug_blis
     - test -f $PREFIX/lib/libblis.a                       # [unix]
     - test -f $PREFIX/lib/libblis${SHLIB_EXT}             # [unix]
