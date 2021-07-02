@@ -38,8 +38,9 @@ test:
     # show CPU features of agent we're running on
     - python -c "import numpy; numpy._pytesttester._show_numpy_info()"
     - $CC debug_blis.c -o debug_blis -I$PREFIX/include -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -lblis -lm -lpthread  # [unix]
+    - ./debug_blis                                                                                                # [unix]
     - 'clang-cl -I%LIBRARY_INC% debug_blis.c blis.lib /link /LIBPATH:%LIBRARY_LIB%'                               # [win]
-    - debug_blis
+    - debug_blis.exe                                                                                              # [win]
     - test -f $PREFIX/lib/libblis.a                       # [unix]
     - test -f $PREFIX/lib/libblis${SHLIB_EXT}             # [unix]
     - test -f $PREFIX/include/blis/blis.h                 # [unix]
