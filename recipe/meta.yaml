@@ -29,6 +29,7 @@ requirements:
 test:
   requires:
     - {{ compiler('c') }}
+    - libblas =*=*_blis
     - clang
     - numpy
     - python
