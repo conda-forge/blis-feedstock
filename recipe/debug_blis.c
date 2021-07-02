@@ -28,7 +28,7 @@ int main(int argc, char** argv)
     {
         for (int j = 0;j < n;j++)
         {
-            printf("%d     ", C[i][j]);
+            printf("%f     ", C[i][j]);
         }
         printf("\n");
     }
@@ -39,6 +39,7 @@ int main(int argc, char** argv)
         double ref = 0;
         for (int p = 0;p < k;p++)
             ref += M[i][p]*M[j][p];
+        printf("%d, %d, %f, %f\n", i, j, ref, C[i][j]);
         assert(fabs(ref - C[i][j]) < 1e-14);
     }
 
