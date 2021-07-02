@@ -23,6 +23,16 @@ int main(int argc, char** argv)
                      &M[0][0], 3, 1,
               &zero, &C[0][0], 5, 1);
 
+    // print matrix C
+    for (int i = 0;i < m;i++)
+    {
+        for (int j = 0;j < n;j++)
+        {
+            printf("%d     ", C[i][j]);
+        }
+        printf("\n");
+    }
+
     for (int i = 0;i < m;i++)
     for (int j = 0;j < n;j++)
     {
