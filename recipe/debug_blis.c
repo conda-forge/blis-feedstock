@@ -40,8 +40,6 @@ int main(int argc, char** argv)
         double ref = 0;
         for (int p = 0;p < k;p++)
             ref += M[i][p]*M[j][p];
-        printf("%d, %d, %f, %f\n", i, j, ref, C[i][j]);
-        fflush(stdout);
         assert(fabs(ref - C[i][j]) < 1e-14);
     }
 
