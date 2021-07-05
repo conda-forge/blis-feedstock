@@ -1,0 +1,29 @@
+From 0ea491e2a77df9dcd012a63d59552dea76fb73d5 Mon Sep 17 00:00:00 2001
+From: Devin Matthews <damatthews@smu.edu>
+Date: Mon, 5 Jul 2021 11:43:50 -0500
+Subject: [PATCH] add debug print statement in bli_ddcopys_mxn
+
+---
+ frame/include/level0/bli_copys_mxn.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/frame/include/level0/bli_copys_mxn.h b/frame/include/level0/bli_copys_mxn.h
+index a8ead1c3..2679a359 100644
+--- a/frame/include/level0/bli_copys_mxn.h
++++ b/frame/include/level0/bli_copys_mxn.h
+@@ -204,8 +204,12 @@ BLIS_INLINE void bli_ddcopys_mxn( const dim_t m, const dim_t n, double*   restri
+ 	{
+ 		for ( dim_t jj = 0; jj < n; ++jj )
+ 		for ( dim_t ii = 0; ii < m; ++ii )
++		{
+ 		bli_ddcopys( *(x + ii*rs_x + jj*cs_x),
+ 		             *(y + ii*rs_y + jj*cs_y) );
++		printf("%lld %lld %lld %lld %lld %lld %p %p %f %f\n", ii, jj, rs_x, cs_x, rs_y, cs_y, x, y, *(x + ii*rs_x + jj*cs_x), *(y + ii*rs_y + jj*cs_y));
++		}
++        fflush(stdout);
+ 	}
+ }
+ BLIS_INLINE void bli_cdcopys_mxn( const dim_t m, const dim_t n, scomplex* restrict x, const inc_t rs_x, const inc_t cs_x,
+-- 
+2.31.1.windows.1
+
