@@ -9,8 +9,8 @@ source:
   url: https://github.com/flame/blis/archive/{{ version }}.tar.gz
   sha256: 729694128719801e82fae7b5f2489ab73e4a467f46271beff09588c9265a697b
   patches:
-    # DEBUG: add print statements bli_ddcopys_mxn
-    - patches/0001-add-debug-print-statement-in-bli_ddcopys_mxn.patch
+    # DEBUG: add print statements bli_gemm_ker_var2
+    - patches/0001-add-debug-print-statement-in-bli_gemm_ker_var2.patch
 
 build:
   number: 0

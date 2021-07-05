@@ -1,0 +1,32 @@
+From 8f27c56ef79eac02c2bbcfc8925b3ac9322d73d3 Mon Sep 17 00:00:00 2001
+From: Devin Matthews <damatthews@smu.edu>
+Date: Mon, 5 Jul 2021 13:33:20 -0500
+Subject: [PATCH] add debug print statement in bli_gemm_ker_var2
+
+---
+ frame/3/gemm/bli_gemm_ker_var2.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/frame/3/gemm/bli_gemm_ker_var2.c b/frame/3/gemm/bli_gemm_ker_var2.c
+index 249c0772..8a4b9e0a 100644
+--- a/frame/3/gemm/bli_gemm_ker_var2.c
++++ b/frame/3/gemm/bli_gemm_ker_var2.c
+@@ -381,6 +381,7 @@ void PASTEMAC(ch,varname) \
+ 			else \
+ 			{ \
+ 				/* Invoke the gemm micro-kernel. */ \
++				if (#ch [0] == 'd') printf("%g %g %a %a\n", *(double* restrict)alpha, *(double* restrict)beta, *(double* restrict)alpha, *(double* restrict)beta); \
+ 				gemm_ukr \
+ 				( \
+ 				  k, \
+@@ -392,6 +393,7 @@ void PASTEMAC(ch,varname) \
+ 				  &aux, \
+ 				  cntx  \
+ 				); \
++				if (#ch [0] == 'd') printf("%g %g %a %a\n", *(double* restrict)alpha, *(double* restrict)beta, *(double* restrict)alpha, *(double* restrict)beta); \
+ \
+ 				/* Scale the bottom edge of C and add the result from above. */ \
+ 				PASTEMAC(ch,xpbys_mxn)( m_cur, n_cur, \
+-- 
+2.31.1.windows.1
+
