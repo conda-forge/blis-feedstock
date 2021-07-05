@@ -1,0 +1,35 @@
+From 664aa1d47bc3f50da6c3dfe3835af8ee01b826ad Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Tue, 6 Jul 2021 01:45:59 +0200
+Subject: [PATCH 2/2] add debug statements in bli_dddxpbys_mxn
+
+---
+ frame/include/level0/bli_xpbys_mxn.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/frame/include/level0/bli_xpbys_mxn.h b/frame/include/level0/bli_xpbys_mxn.h
+index f23df17a..34364fa6 100644
+--- a/frame/include/level0/bli_xpbys_mxn.h
++++ b/frame/include/level0/bli_xpbys_mxn.h
+@@ -227,12 +227,18 @@ BLIS_INLINE void bli_dddxpbys_mxn( const dim_t m, const dim_t n, double*   restr
+                                                             double*   restrict beta,
+                                                             double*   restrict y, const inc_t rs_y, const inc_t cs_y )
+ {
++	printf("bli_dddxpbys_mxn, before beta=0 branch; %g %a\n", *(double* restrict)beta, *(double* restrict)beta);
++	fflush(stdout);
+ 	// If beta is zero, overwrite y with x (in case y has infs or NaNs).
+ 	if ( bli_deq0( *beta ) )
+ 	{
++		printf("bli_dddxpbys_mxn, beta=0 branch taken; %g %a\n", *(double* restrict)beta, *(double* restrict)beta);
++		fflush(stdout);
+ 		bli_ddcopys_mxn( m, n, x, rs_x, cs_x, y, rs_y, cs_y );
+ 		return;
+ 	}
++	printf("bli_dddxpbys_mxn, beta=0 branch not taken; %g %a\n", *(double* restrict)beta, *(double* restrict)beta);
++	fflush(stdout);
+ 
+ #ifdef BLIS_ENABLE_CR_CASES
+ 	if ( rs_x == 1 && rs_y == 1 )
+-- 
+2.31.1.windows.1
+

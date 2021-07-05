@@ -1,7 +1,7 @@
 From e84c53fcf5db5f730bba09f8ab23409ea2b95ce2 Mon Sep 17 00:00:00 2001
 From: Devin Matthews <damatthews@smu.edu>
 Date: Mon, 5 Jul 2021 13:33:20 -0500
-Subject: [PATCH] add debug print statement in bli_gemm_ker_var2
+Subject: [PATCH 1/2] add debug print statement in bli_gemm_ker_var2
 
 ---
  frame/3/gemm/bli_gemm_ker_var2.c | 3 +++
