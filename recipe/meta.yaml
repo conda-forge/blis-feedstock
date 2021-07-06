@@ -23,8 +23,8 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - clangxx <12.0          # [win or osx]
-    - llvm-tools <12.0       # [win or osx]
+    - clangxx                # [win or osx]
+    - llvm-tools             # [win or osx]
     - autotools_clang_conda  # [win]
     - m2-sed                 # [win]
     - sed                    # [unix]
@@ -36,7 +36,7 @@ requirements:
 test:
   requires:
     - {{ compiler('c') }}
-    - clang <12.0
+    - clang
     - numpy
     - python
   files:
