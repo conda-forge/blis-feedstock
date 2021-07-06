@@ -29,11 +29,11 @@ case $target_platform in
         echo "Contents of kernels/skx/3/bli_dgemm_skx_asm_16x14.c:"
         cat kernels/skx/3/bli_dgemm_skx_asm_16x14.c
         echo "Compiling assimbly of frame/3/gemm/bli_gemm_ker_var2.c..."
-        echo "clang-cl -I$PREFIX\Library\include\blis /FAcs -o bli_gemm_ker_var2.s frame/3/gemm/bli_gemm_ker_var2.c"
-        clang-cl -I$PREFIX/include/blis /FAcs -o bli_gemm_ker_var2.s frame/3/gemm/bli_gemm_ker_var2.c
+        echo "clang-cl /FAcs -I$PREFIX/include/blis -o bli_gemm_ker_var2.s frame/3/gemm/bli_gemm_ker_var2.c"
+        clang-cl /FAcs -I$PREFIX/include/blis -o bli_gemm_ker_var2.s frame/3/gemm/bli_gemm_ker_var2.c
         echo "Compiling assimbly of kernels/skx/3/bli_dgemm_skx_asm_16x14.c..."
-        echo "clang-cl -I$PREFIX\Library\include\blis /FAcs -o bli_dgemm_skx_asm_16x14.s kernels/skx/3/bli_dgemm_skx_asm_16x14.c"
-        clang-cl -I$PREFIX/include/blis /FAcs -o bli_dgemm_skx_asm_16x14.s kernels/skx/3/bli_dgemm_skx_asm_16x14.c
+        echo "clang-cl /FAcs -I$PREFIX/include/blis -o bli_dgemm_skx_asm_16x14.s kernels/skx/3/bli_dgemm_skx_asm_16x14.c"
+        clang-cl /FAcs -I$PREFIX/include/blis -o bli_dgemm_skx_asm_16x14.s kernels/skx/3/bli_dgemm_skx_asm_16x14.c
         cat "Contents of bli_gemm_ker_var2.s:"
         cat bli_gemm_ker_var2.s
         echo "Contents of bli_dgemm_skx_asm_16x14.s:"
