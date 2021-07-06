@@ -24,6 +24,18 @@ case $target_platform in
         export LIBPTHREAD=
         ./configure --disable-shared --enable-static --prefix=$PREFIX --enable-cblas --enable-threading=pthreads --enable-arg-max-hack x86_64
         make -j${CPU_COUNT}
+        echo "Contents of frame/3/gemm/bli_gemm_ker_var2.c:"
+        cat frame/3/gemm/bli_gemm_ker_var2.c
+        echo "Contents of kernels/skx/3/bli_dgemm_skx_asm_16x14.c:"
+        cat kernels/skx/3/bli_dgemm_skx_asm_16x14.c
+        echo "Compiling assimbly of frame/3/gemm/bli_gemm_ker_var2.c..."
+        clang-cl -I$LIBRARY_INC -S -o bli_gemm_ker_var2.s frame/3/gemm/bli_gemm_ker_var2.c
+        echo "Compiling assimbly of kernels/skx/3/bli_dgemm_skx_asm_16x14.c..."
+        clang-cl -I$LIBRARY_INC -S -o bli_dgemm_skx_asm_16x14.s kernels/skx/3/bli_dgemm_skx_asm_16x14.c
+        cat "Contents of bli_gemm_ker_var2.s:"
+        cat bli_gemm_ker_var2.s
+        echo "Contents of bli_dgemm_skx_asm_16x14.s:"
+        cat bli_dgemm_skx_asm_16x14.s
         make install
         make check -j${CPU_COUNT}
  
