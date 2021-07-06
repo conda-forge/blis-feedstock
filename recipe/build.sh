@@ -29,11 +29,11 @@ case $target_platform in
         echo "Contents of kernels/skx/3/bli_dgemm_skx_asm_16x14.c:"
         cat kernels/skx/3/bli_dgemm_skx_asm_16x14.c
         echo "Compiling assimbly of frame/3/gemm/bli_gemm_ker_var2.c..."
-        echo "clang-cl /FAcs -I$PREFIX/include/blis -o bli_gemm_ker_var2.s frame/3/gemm/bli_gemm_ker_var2.c"
-        clang-cl /FAcs -I$PREFIX/include/blis -o bli_gemm_ker_var2.s frame/3/gemm/bli_gemm_ker_var2.c
+        echo "clang.exe -O2 -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S frame/3/gemm/bli_gemm_ker_var2.c -o bli_gemm_ker_var2.s"
+        clang.exe -O2 -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S frame/3/gemm/bli_gemm_ker_var2.c -o bli_gemm_ker_var2.s
         echo "Compiling assimbly of kernels/skx/3/bli_dgemm_skx_asm_16x14.c..."
-        echo "clang-cl /FAcs -I$PREFIX/include/blis -o bli_dgemm_skx_asm_16x14.s kernels/skx/3/bli_dgemm_skx_asm_16x14.c"
-        clang-cl /FAcs -I$PREFIX/include/blis -o bli_dgemm_skx_asm_16x14.s kernels/skx/3/bli_dgemm_skx_asm_16x14.c
+        echo "clang.exe -O2 -O3 -fomit-frame-pointer -mavx512f -mavx512dq -mavx512bw -mavx512vl -mfpmath=sse -march=skylake-avx512 -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S kernels/skx/3/bli_dgemm_skx_asm_16x14.c -o bli_dgemm_skx_asm_16x14.s"
+        clang.exe -O2 -O3 -fomit-frame-pointer -mavx512f -mavx512dq -mavx512bw -mavx512vl -mfpmath=sse -march=skylake-avx512 -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S kernels/skx/3/bli_dgemm_skx_asm_16x14.c -o bli_dgemm_skx_asm_16x14.s
         cat "Contents of bli_gemm_ker_var2.s:"
         cat bli_gemm_ker_var2.s
         echo "Contents of bli_dgemm_skx_asm_16x14.s:"
