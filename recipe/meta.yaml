@@ -36,6 +36,7 @@ test:
     - {{ compiler('c') }}
     - clang
     - numpy
+    - python
   files:
     - debug_blis.c
   commands:
