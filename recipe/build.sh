@@ -23,7 +23,7 @@ case $target_platform in
     win-*)
         export LIBPTHREAD=
         ./configure --disable-shared --enable-static --prefix=$PREFIX --enable-cblas --enable-threading=pthreads --enable-arg-max-hack x86_64
-        make -j${CPU_COUNT}
+        make V=1 -j${CPU_COUNT}
         echo "Contents of frame/3/gemm/bli_gemm_ker_var2.c:"
         cat frame/3/gemm/bli_gemm_ker_var2.c
         echo "Contents of kernels/skx/3/bli_dgemm_skx_asm_16x14.c:"
