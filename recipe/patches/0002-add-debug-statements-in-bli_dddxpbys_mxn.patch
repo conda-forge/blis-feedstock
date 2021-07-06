@@ -1,7 +1,7 @@
 From 664aa1d47bc3f50da6c3dfe3835af8ee01b826ad Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Tue, 6 Jul 2021 01:45:59 +0200
-Subject: [PATCH 2/2] add debug statements in bli_dddxpbys_mxn
+Subject: [PATCH 2/3] add debug statements in bli_dddxpbys_mxn
 
 ---
  frame/include/level0/bli_xpbys_mxn.h | 6 ++++++
