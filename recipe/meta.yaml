@@ -12,7 +12,7 @@ source:
     # DEBUG: add print statements in bli_gemm_ker_var2
     - patches/0001-add-debug-print-statement-in-bli_gemm_ker_var2.patch
     # DEBUG: add print statements in bli_dddxpbys_mxn
-    - patches/0002-add-debug-statements-in-bli_dddxpbys_mxn.patch
+    # - patches/0002-add-debug-statements-in-bli_dddxpbys_mxn.patch
 
 build:
   number: 0
