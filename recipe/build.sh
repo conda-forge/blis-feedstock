@@ -23,28 +23,7 @@ case $target_platform in
     win-*)
         export LIBPTHREAD=
         ./configure --disable-shared --enable-static --prefix=$PREFIX --enable-cblas --enable-threading=pthreads --enable-arg-max-hack x86_64
-        make V=1 -j${CPU_COUNT}
-        echo "Contents of frame/3/gemm/bli_gemm_ker_var2.c:"
-        cat frame/3/gemm/bli_gemm_ker_var2.c
-        echo "Contents of kernels/skx/3/bli_dgemm_skx_asm_16x14.c:"
-        cat kernels/skx/3/bli_dgemm_skx_asm_16x14.c
-        echo "Contents of kernels/haswell/3/bli_gemm_haswell_asm_d6x8.c:"
-        cat kernels/haswell/3/bli_gemm_haswell_asm_d6x8.c
-        echo "Compiling assembly of frame/3/gemm/bli_gemm_ker_var2.c..."
-        echo "clang.exe -O2 -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S frame/3/gemm/bli_gemm_ker_var2.c -o ./bli_gemm_ker_var2.s"
-        clang.exe -O2 -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S frame/3/gemm/bli_gemm_ker_var2.c -o ./bli_gemm_ker_var2.s
-        echo "Compiling assembly of kernels/skx/3/bli_dgemm_skx_asm_16x14.c..."
-        echo "clang.exe -O2 -O3 -fomit-frame-pointer -mavx512f -mavx512dq -mavx512bw -mavx512vl -mfpmath=sse -march=skylake-avx512 -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S kernels/skx/3/bli_dgemm_skx_asm_16x14.c -o ./bli_dgemm_skx_asm_16x14.s"
-        clang.exe -O2 -O3 -fomit-frame-pointer -mavx512f -mavx512dq -mavx512bw -mavx512vl -mfpmath=sse -march=skylake-avx512 -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S kernels/skx/3/bli_dgemm_skx_asm_16x14.c -o ./bli_dgemm_skx_asm_16x14.s
-        echo "Compiling assembly of kernels/haswell/3/bli_gemm_haswell_asm_d6x8.c..."
-        echo "clang.exe -O2 -O3 -fomit-frame-pointer -mavx2 -mfma -mfpmath=sse -march=haswell -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S kernels/haswell/3/bli_gemm_haswell_asm_d6x8.c -o ./bli_gemm_haswell_asm_d6x8.s"
-        clang.exe -O2 -O3 -fomit-frame-pointer -mavx2 -mfma -mfpmath=sse -march=haswell -I$PREFIX/include -O2 -D_CRT_SECURE_NO_WARNINGS -D_MT -D_DLL -nostdlib -Xclang --dependent-lib=msvcrt -fuse-ld=lld -Wall -Wno-unused-function -Wfatal-errors -Wno-tautological-compare -std=c99 -D_POSIX_C_SOURCE=200112L -pthread -Iinclude/x86_64 -I./frame/3/ -I./frame/ind/ukernels/ -I./frame/3/ -I./frame/1m/ -I./frame/1f/ -I./frame/1/ -I./frame/include -DBLIS_VERSION_STRING=\"0.8.1\" -DBLIS_IS_BUILDING_LIBRARY -S kernels/haswell/3/bli_gemm_haswell_asm_d6x8.c -o ./bli_gemm_haswell_asm_d6x8.s
-        echo "Contents of bli_gemm_ker_var2.s:"
-        cat ./bli_gemm_ker_var2.s
-        echo "Contents of bli_dgemm_skx_asm_16x14.s:"
-        cat ./bli_dgemm_skx_asm_16x14.s
-        echo "Contents of bli_gemm_haswell_asm_d6x8.s:"
-        cat ./bli_gemm_haswell_asm_d6x8.s
+        make -j${CPU_COUNT}
         make install
         make check -j${CPU_COUNT}
  
