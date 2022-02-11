@@ -18,6 +18,8 @@ build:
   script_env:
     - CPU_FAMILY=x86_64  # [x86_64]
     - CPU_FAMILY=arm64   # [arm64 or aarch64]
+  track_features:
+    - blis-has_lower_priority  # [ threading == 'pthreads']
 
 requirements:
   build:
