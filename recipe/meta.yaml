@@ -1,7 +1,7 @@
 {% set name = "blis" %}
 {% set version = "0.8.1" %}
-{% set build_number = 0 %}
-{% set build_string = "{}_h{}_{}".format(threading, PKG_HASH, build) %}
+{% set build_number = 3 %}
+{% set build_string = "{}_h{}_{}".format(threading, PKG_HASH, build_number) %}
 
 package:
   name: {{ name|lower }}
