@@ -1,6 +1,7 @@
 {% set name = "blis" %}
 {% set version = "0.8.1" %}
-{% build_number = 0 %}
+{% set build_number = 0 %}
+{% set build_string = "{}_h{}_{}".format(threading, PKG_HASH, build) %}
 
 package:
   name: {{ name|lower }}
@@ -13,6 +14,7 @@ source:
 build:
   number: {{ build_number }}
   skip: true  # [win and vc<14]
+  string: {{ build_string }}
   script_env:
     - CPU_FAMILY=x86_64  # [x86_64]
     - CPU_FAMILY=arm64   # [arm64 or aarch64]
