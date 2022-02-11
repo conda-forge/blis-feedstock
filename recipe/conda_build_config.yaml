@@ -1,2 +1,5 @@
 c_compiler:
   - gcc     # [linux]
+threading:
+  - openmp
+  - pthreads
