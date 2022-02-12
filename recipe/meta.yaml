@@ -28,7 +28,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - llvm-openmp            # [osx and (threading == 'openmp')]
+    - llvm-openmp            # [(osx or win) and (threading == 'openmp')]
     - make                   # [unix]
     - autotools_clang_conda  # [win]
     - m2-sed                 # [win]
