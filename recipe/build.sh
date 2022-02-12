@@ -11,8 +11,10 @@ then
 else
   CC_VENDOR=clang
   # Use response file to avoid reaching argument size limits under windows
-  echo $LDFLAGS > LDFLAGS
-  LDFLAGS="@LDFLAGS"
+  echo $LDFLAGS > LDFLAGS.args
+  LDFLAGS="@LDFLAGS.args"
+  echo $CFLAGS > CFLAGS.args
+  CFLAGS="@CFLAGS.args"
 fi
 
 
