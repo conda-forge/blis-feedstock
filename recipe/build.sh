@@ -10,16 +10,13 @@ then
   CC_VENDOR=gcc
 else
   CC_VENDOR=clang
-  # Use response file to avoid reaching argument size limits under windows
-  echo $LDFLAGS > LDFLAGS.args
-  LDFLAGS="@LDFLAGS.args"
-  echo $CFLAGS > CFLAGS.args
-  CFLAGS="@CFLAGS.args"
+  # Response files don't seem to work with windows so we have to activate the arg max hack
+  ARG_MAX_HACK="--enable-arg-max-hack"
 fi
 
 
 
-./configure --prefix=$PREFIX --disable-static --enable-shared --enable-cblas --enable-threading=$threading $CPU_FAMILY
+./configure --prefix=$PREFIX --disable-static --enable-shared --enable-cblas --enable-threading=$threading $ARG_MAX_HACK $CPU_FAMILY
 make CC_VENDOR=$CC_VENDOR -j${CPU_COUNT}
 make CC_VENDOR=$CC_VENDOR install
 make CC_VENDOR=$CC_VENDOR check -j${CPU_COUNT}
