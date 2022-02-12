@@ -10,7 +10,12 @@ then
   CC_VENDOR=gcc
 else
   CC_VENDOR=clang
+  # Use response file to avoid reaching argument size limits under windows
+  echo $LDFLAGS > LDFLAGS
+  LDFLAGS="@LDFLAGS"
 fi
+
+
 
 ./configure --prefix=$PREFIX --disable-static --enable-shared --enable-cblas --enable-threading=$threading $CPU_FAMILY
 make CC_VENDOR=$CC_VENDOR -j${CPU_COUNT}
