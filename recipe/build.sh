@@ -20,3 +20,12 @@ fi
 make CC_VENDOR=$CC_VENDOR -j${CPU_COUNT}
 make CC_VENDOR=$CC_VENDOR install
 make CC_VENDOR=$CC_VENDOR check -j${CPU_COUNT}
+
+for out in out.*
+do
+  echo *******************************************************************
+  echo $out
+  echo *******************************************************************
+  cat $out
+  echo *******************************************************************
+
