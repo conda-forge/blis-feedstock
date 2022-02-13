@@ -12,6 +12,9 @@ else
   CC_VENDOR=clang
   # Response files don't seem to work with windows so we have to activate the arg max hack
   ARG_MAX_HACK="--enable-arg-max-hack"
+  unset CFLAGS
+  unset LDFLAGS
+  unset CXXFLAGS
 fi
 
 
