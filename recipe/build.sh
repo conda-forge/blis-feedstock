@@ -17,10 +17,15 @@ else
   unset CXXFLAGS
 fi
 
+  echo '*******************************************************************'
+  echo Actual CFLAGS
+  echo '*******************************************************************'
+  cat $CFLAGS
+  echo '*******************************************************************'
 
 
 ./configure --prefix=$PREFIX --disable-static --enable-shared --enable-cblas --enable-threading=$threading $ARG_MAX_HACK $CPU_FAMILY
-make CC_VENDOR=$CC_VENDOR -j${CPU_COUNT}
+make V=1 CC_VENDOR=$CC_VENDOR -j${CPU_COUNT}
 make CC_VENDOR=$CC_VENDOR install
 make CC_VENDOR=$CC_VENDOR check -j${CPU_COUNT}
 
