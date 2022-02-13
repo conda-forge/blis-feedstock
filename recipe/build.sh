@@ -23,6 +23,11 @@ fi
   echo  $CFLAGS
   echo '*******************************************************************'
 
+  echo '*******************************************************************'
+  echo "$CC --version" 
+  echo '*******************************************************************'
+  $CC --version
+  echo '*******************************************************************'
 
 ./configure --prefix=$PREFIX --disable-static --enable-shared --enable-cblas --enable-threading=$threading $ARG_MAX_HACK $CPU_FAMILY
 make V=1 CC_VENDOR=$CC_VENDOR -j${CPU_COUNT}
