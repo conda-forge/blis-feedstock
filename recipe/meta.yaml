@@ -1,4 +1,4 @@
-{% set version = "0.9.0" %}
+{% set version = "1.0" %}
 
 package:
   name: blis
@@ -6,13 +6,10 @@ package:
 
 source:
   url: https://github.com/flame/blis/archive/{{ version }}.tar.gz
-  sha256: 1135f664be7355427b91025075562805cdc6cc730d3173f83533b2c5dcc2f308
-  patches:
-    # see https://github.com/flame/blis/issues/746
-    - patches/0001-add-missing-include.patch
+  sha256: 9c12972aa1e50f64ca61684eba6828f2f3dd509384b1e41a1e8a9aedea4b16a6
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
