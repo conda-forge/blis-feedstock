@@ -7,9 +7,6 @@ package:
 source:
   url: https://github.com/flame/blis/archive/{{ version }}.tar.gz
   sha256: 847c035809b8994c077ade737a4813601db96c4cf0d903d08ba6a9b8ee0fe03e
-  patches:
-    # see https://github.com/flame/blis/issues/746
-    - patches/0001-add-missing-include.patch
 
 build:
   number: 0
