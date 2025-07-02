@@ -6,7 +6,7 @@ sed -i.bak 's/LDFLAGS := $(sort $(LDFLAGS))//g' common.mk
 
 
 # Multithreading
-MODEL="pthreads"
+MODEL="openmp"
 
 
 # Map platform to BLIS target architecture 
