@@ -1,0 +1,64 @@
+schema_version: 1
+
+context:
+  version: "2.0"
+
+package:
+  name: blis
+  version: ${{ version }}
+
+source:
+  url: https://github.com/flame/blis/archive/${{ version }}.tar.gz
+  sha256: 08bbebd77914a6d1a43874ae5ec2f54fe6a77cba745f2532df28361b0f1ad1b3
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - if: win or osx
+      then:
+        - clangxx
+        - llvm-tools
+    - if: win
+      then:
+        - autotools_clang_conda
+        - m2-sed
+      else:
+        - sed
+    - if: linux
+      then: make
+    - perl
+    - python >=3.5
+  host:
+  run:
+
+tests:
+  - script:
+      - if: unix
+        then:
+          - test -f $PREFIX/lib/libblis.a
+          - test -f $PREFIX/lib/libblis${SHLIB_EXT}
+          - test -f $PREFIX/include/blis/blis.h
+          - test -f $PREFIX/include/blis/cblas.h
+      - if: win
+        then:
+          - if not exist %LIBRARY_INC%\blis\blis.h exit 1
+          - if not exist %LIBRARY_INC%\blis\cblas.h exit 1
+          - if not exist %LIBRARY_BIN%\libblis.4.dll exit 1
+          - if not exist %LIBRARY_LIB%\blis.lib exit 1
+          - if not exist %LIBRARY_LIB%\libblis.lib exit 1
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: BLAS-like Library Instantiation Software Framework
+  homepage: http://github.com/flame/blis
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - h-vetinari
+    - gdonval
