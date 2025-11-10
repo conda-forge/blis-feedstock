@@ -6,6 +6,10 @@ CFLAGS=$(echo "${CFLAGS}" | sed "s/-mtune=[a-zA-Z0-9]*//g")
 case $target_platform in
     win-*)
         export PYTHON=${BUILD_PREFIX}/python
+        # upstream's build system messes up paths with D:/...
+        export CFLAGS=${CFLAGS/D:\///d/}
+        export CXXFLAGS=${CXXFLAGS/D:\///d/}
+        export LDFLAGS=${LDFLAGS/D:\///d/}
         ;;
     *)
         export PYTHON=${BUILD_PREFIX}/bin/python
