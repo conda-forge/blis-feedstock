@@ -4,6 +4,14 @@ CFLAGS=$(echo "${CFLAGS}" | sed "s/-mtune=[a-zA-Z0-9]*//g")
 # Avoid sorting LDFLAGS
 sed -i.bak 's/LDFLAGS := $(sort $(LDFLAGS))//g' common.mk
 
+case $target_platform in
+    win-*)
+        export PYTHON=${BUILD_PREFIX}/python
+        ;;
+    *)
+        export PYTHON=${BUILD_PREFIX}/bin/python
+        ;;
+esac
 
 # Multithreading
 MODEL="pthreads"
