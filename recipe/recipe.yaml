@@ -10,6 +10,9 @@ package:
 source:
   url: https://github.com/flame/blis/archive/${{ version }}.tar.gz
   sha256: 08bbebd77914a6d1a43874ae5ec2f54fe6a77cba745f2532df28361b0f1ad1b3
+  patches:
+    # https://github.com/flame/blis/pull/908
+    - patches/0001-Blacklist-knl-for-clang-19.patch
 
 build:
   number: 0

@@ -1,0 +1,41 @@
+From fac3c2021287167944bc925a0677cfabba0f00ca Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Micha=C5=82=20G=C3=B3rny?= <mgorny@quansight.com>
+Date: Mon, 10 Nov 2025 19:37:14 +0100
+Subject: [PATCH] Blacklist knl for clang 19+
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+KNL-specific `-mavx512er` and `-mavx512pf` flags have been removed
+from Clang in llvm/llvm-project#92883, which was included in Clang 19.
+
+Fixes #907
+
+Signed-off-by: Michał Górny <mgorny@quansight.com>
+---
+ configure | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/configure b/configure
+index 8b1bb943f..6e8e7421e 100755
+--- a/configure
++++ b/configure
+@@ -1778,7 +1778,7 @@ check_compiler()
+ 	# Specific:
+ 	#
+ 	#   skx: icc 15.0.1+, gcc 6.0+, clang 3.9+
+-	#   knl: icc 14.0.1+, gcc 5.0-14, clang 3.9+
++	#   knl: icc 14.0.1+, gcc 5.0-14, clang 3.9+-18
+ 	#   haswell: any
+ 	#   sandybridge: any
+ 	#   penryn: any
+@@ -1917,6 +1917,9 @@ check_compiler()
+ 			if [[ ${cc_major} -lt 11 ]]; then
+ 				blacklistcc_add "armsve"
+ 			fi
++			if [[ ${cc_major} -ge 19 ]]; then
++				blacklistcc_add "knl"
++			fi
+ 		fi
+ 	fi
+ }
