@@ -1,3 +1,8 @@
+set -xe
+
+xargs --show-limits
+exit 1
+
 CFLAGS=$(echo "${CFLAGS}" | sed "s/-march=[a-zA-Z0-9]*//g")
 CFLAGS=$(echo "${CFLAGS}" | sed "s/-mtune=[a-zA-Z0-9]*//g")
 
