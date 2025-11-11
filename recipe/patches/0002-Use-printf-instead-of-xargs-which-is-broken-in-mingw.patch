@@ -1,0 +1,26 @@
+From b47aef70e52a947b98f7dcf9b3e4c040d476e349 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Micha=C5=82=20G=C3=B3rny?= <mgorny@quansight.com>
+Date: Tue, 11 Nov 2025 17:24:49 +0100
+Subject: [PATCH] Use printf instead of xargs which is broken in mingw env
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Michał Górny <mgorny@quansight.com>
+---
+ configure | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure b/configure
+index 3cc67ff1..0e6acd12 100755
+--- a/configure
++++ b/configure
+@@ -2492,7 +2492,7 @@ build_and_check_configurations()
+ 	# We use a sorted version of kernel_list so that it ends up matching the
+ 	# display order of the kconfig_registry above.
+ 	# shellcheck disable=2086
+-	kernel_list_sort=$(echo ${kernel_list} | xargs -n1 | sort -u)
++	kernel_list_sort=$(printf "%s\n" ${kernel_list} | sort -u)
+ 
+ 	kconfig_map=""
+ 	for kernel in ${kernel_list_sort}; do

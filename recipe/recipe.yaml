@@ -13,6 +13,8 @@ source:
   patches:
     # https://github.com/flame/blis/pull/908
     - patches/0001-Blacklist-knl-for-clang-19.patch
+    # workaround problems with xargs in win-64 build env
+    - patches/0002-Use-printf-instead-of-xargs-which-is-broken-in-mingw.patch
 
 build:
   number: 0
