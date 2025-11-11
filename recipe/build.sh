@@ -1,5 +1,6 @@
 set -xe
 
+env
 xargs --show-limits
 exit 1
 
