@@ -72,8 +72,11 @@ make check -j${CPU_COUNT}
 case $target_platform in win-*)
     ./configure --enable-shared --disable-static --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$MODEL" --enable-arg-max-hack $arch
     make -j${CPU_COUNT}
-    make install 
-    find $PREFIX/lib -iname "libblis.*.dll" -exec mv {} $PREFIX/bin/ \;
-    mv $PREFIX/lib/libblis.lib $PREFIX/lib/blis.lib
+    make install
+
+    # due to upstream bug, library is not installed currently
+    # https://github.com/flame/blis/issues/911
+    mv lib/*/libblis.lib $PREFIX/lib/blis.lib
+    mv lib/*/libblis*.dll $PREFIX/bin/
     mv $PREFIX/lib/libblis.a $PREFIX/lib/libblis.lib
 esac
