@@ -2,6 +2,7 @@ schema_version: 1
 
 context:
   version: "2.0"
+  build_number: 0
 
 package:
   name: blis
@@ -17,7 +18,8 @@ source:
     - patches/0002-Use-printf-instead-of-xargs-which-is-broken-in-mingw.patch
 
 build:
-  number: 0
+  number: ${{ build_number }}
+  string: ${{ threading }}_h${{ hash }}_${{ build_number }}
 
 requirements:
   build:
@@ -37,6 +39,12 @@ requirements:
       then: make
     - perl
     - python >=3.5
+  host:
+    - if: threading == "openmp"
+      then:
+        - if: linux
+          then: libgomp
+          else: llvm-openmp
 
 tests:
   - script:

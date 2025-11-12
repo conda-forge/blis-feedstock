@@ -16,9 +16,6 @@ case $target_platform in
         ;;
 esac
 
-# Multithreading
-MODEL="pthreads"
-
 
 # Map platform to BLIS target architecture 
 case $target_platform in
@@ -62,7 +59,7 @@ esac
 
 
 # General case
-./configure --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$MODEL" $EXTRA $arch
+./configure --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$threading" $EXTRA $arch
 make -j${CPU_COUNT}
 make install
 make check -j${CPU_COUNT}
@@ -70,7 +67,7 @@ make check -j${CPU_COUNT}
 
 # Windows-specific shenanigans (builds twice; first static above, then shared below)
 case $target_platform in win-*)
-    ./configure --enable-shared --disable-static --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$MODEL" --enable-arg-max-hack $arch
+    ./configure --enable-shared --disable-static --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$threading" --enable-arg-max-hack $arch
     make -j${CPU_COUNT}
     make install
 
