@@ -59,7 +59,9 @@ tests:
           - if not exist %LIBRARY_INC%\blis\blis.h exit 1
           - if not exist %LIBRARY_INC%\blis\cblas.h exit 1
           - if not exist %LIBRARY_BIN%\libblis.4.dll exit 1
+          # import library for the .dll
           - if not exist %LIBRARY_LIB%\blis.lib exit 1
+          # static library
           - if not exist %LIBRARY_LIB%\libblis.lib exit 1
 
 about:
