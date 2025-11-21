@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "2.0"
-  build_number: 0
+  build_number: 1
 
 package:
   name: blis
@@ -20,6 +20,8 @@ source:
 build:
   number: ${{ build_number }}
   string: ${{ threading }}_h${{ hash }}_${{ build_number }}
+  variant:
+    down_prioritize_variant: ${{ 1 if threading == "openmp" else 0 }}
 
 requirements:
   build:
