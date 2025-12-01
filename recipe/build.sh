@@ -58,16 +58,11 @@ case $target_platform in
 esac
 
 
-# General case
-./configure --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$threading" $EXTRA $arch
-make -j${CPU_COUNT}
-make install
-make check -j${CPU_COUNT}
-
-
-# Windows-specific shenanigans (builds twice; first static above, then shared below)
+# Windows-specific shenanigans (builds twice; first shared here, then static below)
 case $target_platform in win-*)
-    ./configure --enable-shared --disable-static --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$threading" --enable-arg-max-hack $arch
+    mkdir shared
+    cd shared
+    ../configure --enable-shared --disable-static --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$threading" --enable-arg-max-hack $arch
     make -j${CPU_COUNT}
     make install
 
@@ -75,5 +70,17 @@ case $target_platform in win-*)
     # https://github.com/flame/blis/issues/911
     mv lib/*/libblis.lib $PREFIX/lib/blis.lib
     mv lib/*/libblis*.dll $PREFIX/bin/
+    cd ..
+esac
+
+
+# General case
+./configure --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$threading" $EXTRA $arch
+make -j${CPU_COUNT}
+make install
+make check -j${CPU_COUNT}
+
+
+case $target_platform in win-*)
     mv $PREFIX/lib/libblis.a $PREFIX/lib/libblis.lib
 esac
