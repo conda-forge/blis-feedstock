@@ -32,13 +32,11 @@ case $target_platform in
     osx-*)
         export CC_VENDOR=clang
         export PYTHON=${BUILD_PREFIX}/bin/python
-        EXTRA=""
         ;;
     linux-*)
         ln -s `which $CC` $BUILD_PREFIX/bin/gcc
         export CC_VENDOR=gcc
         export PYTHON=${BUILD_PREFIX}/bin/python
-        EXTRA=""
         ;;
     win-*)
         export LIBPTHREAD=""
@@ -47,34 +45,45 @@ case $target_platform in
         export CFLAGS=${CFLAGS/D:\///d/}
         export CXXFLAGS=${CXXFLAGS/D:\///d/}
         export LDFLAGS=${LDFLAGS/D:\///d/}
-        EXTRA="--enable-arg-max-hack --disable-shared --enable-static"
         ;;
 esac
 
 
-# Windows-specific shenanigans (builds twice; first shared here, then static below)
-case $target_platform in win-*)
-    mkdir shared
-    cd shared
-    ../configure --enable-shared --disable-static --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$threading" --enable-arg-max-hack $arch
-    make -j${CPU_COUNT}
-    make install
-
-    # due to upstream bug, library is not installed currently
-    # https://github.com/flame/blis/issues/911
-    mv lib/*/libblis.lib $PREFIX/lib/blis.lib
-    mv lib/*/libblis*.dll $PREFIX/bin/
-    cd ..
-esac
+COMMON_CONFIGURE_ARGS=(
+    --prefix="${PREFIX}"
+    --enable-verbose-make
+    --enable-cblas
+    --enable-threading="${threading}"
+    # note: arch must always come last
+    "${arch}"
+)
 
 
-# General case
-./configure --prefix=$PREFIX --enable-verbose-make --enable-cblas --enable-threading="$threading" $EXTRA $arch
-make -j${CPU_COUNT}
-make install
-make check -j${CPU_COUNT}
+case $target_platform in
+    win-*)
+        # Windows: build shared and static libraries separately
+        mkdir shared
+        cd shared
+        ../configure --enable-shared --disable-static --enable-arg-max-hack "${COMMON_CONFIGURE_ARGS[@]}"
+        make -j${CPU_COUNT}
+        make install
+        # due to upstream bug, library is not installed currently
+        # https://github.com/flame/blis/issues/911
+        mv lib/*/libblis.lib "${PREFIX}"/lib/blis.lib
+        mv lib/*/libblis*.dll "${PREFIX}"/bin/
+        cd ..
 
-
-case $target_platform in win-*)
-    mv $PREFIX/lib/libblis.a $PREFIX/lib/libblis.lib
+        ./configure --disable-shared --enable-static --enable-arg-max-hack "${COMMON_CONFIGURE_ARGS[@]}"
+        make -j${CPU_COUNT}
+        make install
+        make check -j${CPU_COUNT}
+        mv "${PREFIX}"/lib/libblis.a "${PREFIX}"/lib/libblis.lib
+        ;;
+    *)
+        # General case: build both static and shared simultaneously
+        ./configure "${COMMON_CONFIGURE_ARGS[@]}"
+        make -j${CPU_COUNT}
+        make install
+        make check -j${CPU_COUNT}
+        ;;
 esac
