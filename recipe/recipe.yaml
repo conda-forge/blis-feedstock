@@ -49,22 +49,23 @@ requirements:
           else: llvm-openmp
 
 tests:
-  - script:
-      - if: unix
-        then:
-          - test -f $PREFIX/lib/libblis.a
-          - test -f $PREFIX/lib/libblis${SHLIB_EXT}
-          - test -f $PREFIX/include/blis/blis.h
-          - test -f $PREFIX/include/blis/cblas.h
-      - if: win
-        then:
-          - if not exist %LIBRARY_INC%\blis\blis.h exit 1
-          - if not exist %LIBRARY_INC%\blis\cblas.h exit 1
-          - if not exist %LIBRARY_BIN%\libblis.4.dll exit 1
-          # import library for the .dll
-          - if not exist %LIBRARY_LIB%\blis.lib exit 1
-          # static library
-          - if not exist %LIBRARY_LIB%\libblis.lib exit 1
+  - package_contents:
+      include:
+        - blis/blis.h
+        - blis/cblas.h
+      lib:
+        - if: unix
+          then: blis
+          else: libblis.4
+      files:
+        - if: unix
+          then:
+            - lib/libblis.a
+          else:
+            # import library for the .dll
+            - Library/lib/blis.lib
+            # static library
+            - Library/lib/libblis.lib
 
 about:
   license: BSD-3-Clause
