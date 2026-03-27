@@ -11,6 +11,7 @@ case $target_platform in
         ;;
     osx-arm64)
         arch="firestorm"  # better performance for osx-arm64
+        ;;
     *-64)
         arch="x86_64"
         ;;
