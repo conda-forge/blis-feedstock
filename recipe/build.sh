@@ -9,6 +9,8 @@ case $target_platform in
     osx-64)
         arch="intel64"
         ;;
+    osx-arm64)
+        arch="firestorm"  # better performance for osx-arm64
     *-64)
         arch="x86_64"
         ;;
