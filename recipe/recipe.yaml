@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "2.0"
-  build_number: 4
+  version: "2.1"
+  build_number: 0
 
 package:
   name: blis
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/flame/blis/archive/${{ version }}.tar.gz
-  sha256: 08bbebd77914a6d1a43874ae5ec2f54fe6a77cba745f2532df28361b0f1ad1b3
+  sha256: 901752ec596cd63421ea45a6a06a9f34491cf5ae01cea412ece05f97a2690a96
   patches:
     # https://github.com/flame/blis/pull/908
     - patches/0001-Blacklist-knl-for-clang-19.patch
